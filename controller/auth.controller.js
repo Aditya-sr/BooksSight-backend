@@ -40,9 +40,10 @@ const registerUser = async (req, res) => {
 
 
 
-const getAllUser = async (req, res) => {
+const getAllUser =  async (req, res) => {
   try {
     const users = await Registration.findAll();
+    console.log("Fetched User",users)
     res.status(200).json({ users });
     console.log(users);
   } catch (error) {
@@ -66,7 +67,7 @@ const authMiddleware = async (req, res, next) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    req.userRole = user.role;
+  req.userRole = user.role;
     next();
   } catch (error) {
     console.error("Authentication error:", error);
